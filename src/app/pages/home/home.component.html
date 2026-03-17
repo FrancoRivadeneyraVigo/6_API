@@ -1,0 +1,14 @@
+<div class="container">
+    <section class="logo d-flex justify-content-center">
+        <figure class="w-50">
+            <img src="" alt="">
+        </figure>
+    </section>
+    <section class="users row">
+        @for (user of arrayPromises(); track user.id) {
+            <article class="col-12 col-md-6 col-lg-4 col-xl-3">
+                <p>{{user.first_name}}</p>
+            </article>
+        }
+    </section>
+</div>

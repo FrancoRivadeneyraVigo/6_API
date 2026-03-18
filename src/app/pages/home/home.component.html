@@ -1,13 +1,17 @@
 <div class="container">
-    <section class="logo d-flex justify-content-center">
-        <figure class="w-50">
-            <img src="" alt="">
-        </figure>
-    </section>
     <section class="users row">
-        @for (user of arrayPromises(); track user.id) {
+        @for (user of arrayPromises(); track user._id) {
             <article class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <p>{{user.first_name}}</p>
+                <div class="card">
+                    <img [src]="user.image" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <p>{{user.first_name}} {{user.last_name}}</p>
+
+                        <button [routerLink]="['/user', user._id]">Ver detalle</button>
+                        <button [routerLink]="['/updateuser', user._id]">Actualizar</button>
+                        <button (click)="deleteUser(user._id)">Borrar</button>
+                    </div>
+                </div>
             </article>
         }
     </section>

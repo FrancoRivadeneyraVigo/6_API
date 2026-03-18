@@ -1,1 +1,12 @@
-<p>user-detail works!</p>
+<div class="card">
+    <img [src]="user.image" class="card-img-top" alt="">
+    <div class="card-body">
+        <p>{{ user.first_name }} {{ user.last_name }}</p>
+        <p> Nombre Usuario: {{user.first_name}}</p>
+        <p> Email:{{user.email}}</p>
+        <button [routerLink]="['/home']">Volver a listado</button>
+        <button [routerLink]="['/updateuser', user.id]">Editar</button>
+        <button (click)="deleteUser(user._id)">Eliminar</button>
+    </div>
+</div>
+

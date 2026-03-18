@@ -1,5 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import { Component, inject, Signal, signal } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { Users } from '../../services/users';
 import { lastValueFrom } from 'rxjs';
 import { IuserType } from '../../interfaces/iuser-type.interface';
@@ -13,26 +13,21 @@ import { IuserType } from '../../interfaces/iuser-type.interface';
 export class UserDetailComponent {
   userServices = inject(Users);
   route = inject(ActivatedRoute);
-  user!: IuserType;
-  arrayPromises = signal<IuserType[]>([]);
+  router = inject(Router)
+  user = signal<IuserType | null>(null);
 
   async ngOnInit() {
-    try {
-      const _idParam = this.route.snapshot.paramMap.get('_id');
+    const id = this.route.snapshot.paramMap.get('id');
 
-      const _id = String(_idParam);
+    if (!id) { return;}
 
-      const response = await this.userServices.getById(_id);
-      this.user = response;
-    }
-    catch{
-      console.error('Error fetching user details');
-      return;
-    }
+    const response = await this.userServices.getById(id);
+
+    this.user.set(response);
   }
 
     
-  async deleteUser(_id: string) {
+  async deleteUser(_id: string | undefined) {
     try {
       const confirmDelete = confirm("Estas seguro que queires elimniar este usuario?");
 
@@ -40,13 +35,11 @@ export class UserDetailComponent {
         return;
       }
 
-      await this.userServices.deleteUser(_id);
+      await this.userServices.deleteUser(_id as string);
 
       alert("Usuario eliminado correctamente");
 
-      this.arrayPromises.update(users => 
-        users.filter(user => user._id !== _id)
-      );
+      this.router.navigate(['/home']);
 
     } catch (error: any) {
       console.error('Error deleting user:', error);

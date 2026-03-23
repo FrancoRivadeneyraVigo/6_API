@@ -29,7 +29,7 @@ export class UserDetailComponent {
     
   async deleteUser(_id: string | undefined) {
     try {
-      const confirmDelete = confirm("Estas seguro que queires elimniar este usuario?");
+      const confirmDelete = confirm("Estas seguro que queires eliminar este usuario?");
 
       if (!confirmDelete) {
         return;

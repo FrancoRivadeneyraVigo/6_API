@@ -1,1 +1,54 @@
-<p>user-form works!</p>
+<h2>{{isEdit ? 'Actualizar Usuario' : 'Nuevo Usuario'}}</h2>
+
+<div class="container mt-4">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Nombre Usuario</label>
+            <input type="text" class="form-control" id="first_name" placeholder="Ingrese su nombre" formControlName="first_name">
+
+            @if(checkControl('first_name','required')){
+                <p class="error">Campo Requerido</p>
+            }
+            @if(checkControl('first_name','minlength')){
+                <p class="error">Minimo 3 caracteres</p>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Apellido Usuario</label>
+            <input type="text" class="form-control" id="last_name" placeholder="Ingrese su nombre" formControlName="last_name">
+
+            @if(checkControl('last_name','required')){
+                <p class="error">Campo Requerido</p>
+            }
+            @if(checkControl('last_name','minlength')){
+                <p class="error">Minimo 3 caracteres</p>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Ingrese su email" formControlName="email">
+
+            @if(checkControl('email','required')){
+                <p class="error">Campo Requerido</p>
+            }
+            @if(checkControl('email','pattern')){
+                <p class="error">El email no esta bien formado</p>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Imagen</label>
+            <input type="text" class="form-control" placeholder="Ingrese su URL de la imagen" formControlName="image">
+
+            @if(checkControl('image','required')){
+                <p class="error">Campo Requerido</p>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-success">{{isEdit ? 'Actualizar Usuario' : 'Guardar'}}</button>
+
+        <button type="button" class="btn btn-secondary ms-2" [routerLink]="['/home']">Cancelar</button>
+    </form>
+</div>

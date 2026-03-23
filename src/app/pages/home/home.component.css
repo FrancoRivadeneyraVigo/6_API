@@ -1,0 +1,25 @@
+.users{
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    margin-top: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+@media (max-width: 992px) {
+    .users {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .users {
+        grid-template-columns: 1fr;
+    }
+}

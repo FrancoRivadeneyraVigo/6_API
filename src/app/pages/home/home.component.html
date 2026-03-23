@@ -1,18 +1,12 @@
+<hr>
 <div class="container">
-    <section class="users row">
+    <section class="users">
         @for (user of arrayPromises(); track user._id) {
-            <article class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <div class="card">
-                    <img [src]="user.image" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <p>{{user.first_name}} {{user.last_name}}</p>
-
-                        <button [routerLink]="['/user', user._id]">Ver detalle</button>
-                        <button [routerLink]="['/updateuser', user._id]">Actualizar</button>
-                        <button (click)="deleteUser(user._id)">Borrar</button>
-                    </div>
-                </div>
-            </article>
+        <app-user-card [user]="user" (deleteEmit)="deleteUser($event)"></app-user-card>
         }
     </section>
+    <div class="d-flex justify-content-between py-2">
+        <button class="btn btn-warning" (click)="gotoPrev()">ANTERIOR</button>
+        <button class="btn btn-warning" (click)="gotoNext()">SIGUIENTE</button>
+    </div>
 </div>

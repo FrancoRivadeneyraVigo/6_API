@@ -13,12 +13,12 @@ export class Users {
   private baseUrl: string = "https://peticiones.online/api/users";
 
   //GET
-  getAllPromises(): Promise<IResponse> {
-    return lastValueFrom(this.http.get<IResponse>(this.baseUrl));
+  getAllPromises(url: number): Promise<IResponse> {
+    return lastValueFrom(this.http.get<IResponse>(`${this.baseUrl}?page=${url}`));
   }
 
   //GET by ID
-  getById(_id: string): Promise<IuserType> {
+  getById(_id: string | undefined): Promise<IuserType> {
     return lastValueFrom(this.http.get<IuserType>(`${this.baseUrl}/${_id}`));
   }
 
@@ -33,7 +33,7 @@ export class Users {
   }
 
   //DELETE
-  deleteUser(_id: string): Promise<IResponse> {
+  deleteUser(_id: string | undefined): Promise<IResponse> {
     return lastValueFrom(this.http.delete<IResponse>(`${this.baseUrl}/${_id}`));
   }
 

@@ -1,1 +1,10 @@
-<p>user-card works!</p>
+<article class="card mb-2">
+        <img [src]="user()?.image" class="card-img-top" alt="">
+        <div class="card-body">
+            <p>{{user()?.first_name}} {{user()?.last_name}}</p>
+
+            <button class="btn btn-secondary" [routerLink]="['/user', user()?._id]">Ver detalle</button>
+            <button class="btn btn-warning m-1" [routerLink]="['/updateuser', user()?._id]">Actualizar</button>
+            <button class="btn btn-danger" (click)="deleteUser(user()?._id)">Borrar</button>
+        </div>
+</article>
